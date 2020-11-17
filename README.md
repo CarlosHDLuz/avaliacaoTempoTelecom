@@ -28,7 +28,7 @@ pip install psycopg2
 4. Criar GROUP ROLE no PostgreSQL como superuser
 ```
 CREATE ROLE "avaliacao-tempo-db-user" WITH
-	NOLOGIN
+	LOGIN
 	SUPERUSER
 	CREATEDB
 	CREATEROLE
