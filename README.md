@@ -51,7 +51,17 @@ CREATE DATABASE "avaliacao-tempo-db"
 
 0. Vá ao diretório do projeto onde se encontra 'manage.py'.
 
-1. Execute:
+1. Criar migrations
+```
+py manage.py makemigrations
+```
+
+2. Aplicar migrations
+```
+py manage.py migrate
+```
+
+1. Execute o projeto
 ```
 py manage.py runserver
 ```
