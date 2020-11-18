@@ -2,6 +2,13 @@
 
 {% block content %}
 
-    {{ cliente }}
+    <h1>Cliente {{ cliente.id }}</h1>
+    <p>
+        Nome: {{ cliente.nome }}
+        <br>
+        Telefone: {{ cliente.telefone }}
+        <br>
+        Data de nascimento: {{ cliente.nascimento }}
+    </p>
 
 {% endblock content %}
