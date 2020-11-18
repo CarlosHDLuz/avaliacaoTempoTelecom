@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from django.http import Http404, HttpResponseRedirect
 
 from .models import Cliente, Produto
-from .forms import ClienteForm
+from .forms import ClienteForm, ProdutoForm
 
 import datetime
 
@@ -63,3 +63,25 @@ def cliente_create(request):
 def produtos(request):
     latest_produtos_list = Produto.objects.order_by('-created_at')
     return render(request, 'pedidos/produtos.html', {'latest_produtos_list': latest_produtos_list})
+
+
+def produto_create(request):
+    form = ProdutoForm()
+
+    if request.method == 'POST':
+
+        form = ProdutoForm(request.POST)
+
+        if form.is_valid():
+            produto_nome=form.cleaned_data['nome']
+            produto_valor=form.cleaned_data['valor']
+
+            novo_produto=Produto(
+                nome=produto_nome,
+                valor=produto_valor,
+            )
+            novo_produto.save()
+
+            return redirect('pedidos:produtos')
+
+    return render(request, 'pedidos/add_produto.html', {'form': form})
