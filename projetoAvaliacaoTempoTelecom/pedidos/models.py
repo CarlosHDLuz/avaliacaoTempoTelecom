@@ -3,7 +3,7 @@ from django.db import models
 
 class Produto(models.Model):
     nome = models.CharField(max_length=100, blank=False, null=False)
-    valor = models.DecimalField(max_digits=12, decimal_places=2, null=False)
+    valor = models.DecimalField(max_digits=12, decimal_places=2, null=False, help_text="Formato: 1234567.89")
     # Valor máximo 9 999 999 999,99 -> 12 dígitos
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -22,3 +22,12 @@ class Cliente(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class Pedido(models.Model):
+    # numero do pedido -> id, auto incrementado e único para cada objeto/tupla do banco
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    produto = models.ManyToManyField(Produto)
+    valor_total = models.DecimalField(max_digits=12, decimal_places=2, null=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{{ STATIC_URL }}
+
+    <h1>Pedidos</h1>
+
+    {% if latest_pedidos_list %}
+    <ul>
+    {% for pedido in latest_pedidos_list %}
+        <li>Pedido {{ pedido.id }}</li>
+    {% endfor %}
+    </ul>
+    {% else %}
+        <p>Nenhum pedido disponível.</p>
+    {% endif %}
+
+<!--    <a href="{# url 'pedidos:pedido_create' #}" class="btn btn-primary">Novo</a>-->
+
+{% endblock content %}
