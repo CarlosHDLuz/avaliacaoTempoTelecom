@@ -8,7 +8,7 @@
         <br>
         Telefone: {{ cliente.telefone }}
         <br>
-        Data de nascimento: {{ cliente.nascimento }}
+        Data de nascimento: {{ cliente.nascimento|date:"j n Y" }}
     </p>
 
 {% endblock content %}

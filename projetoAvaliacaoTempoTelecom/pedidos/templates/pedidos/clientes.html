@@ -16,4 +16,6 @@
         <p>Nenhum cliente disponível.</p>
     {% endif %}
 
+    <a href="{% url 'pedidos:cliente_create' %}" class="btn btn-primary">Novo</a>
+
 {% endblock content %}

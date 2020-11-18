@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from django.http import Http404, HttpResponseRedirect
 
 from .models import Cliente, Produto
+from .forms import ClienteForm
 
 import datetime
 
@@ -33,6 +34,30 @@ def cliente(request, cliente_id):
     except Cliente.DoesNotExist:
         raise Http404("Cliente não existe!")
     return render(request, 'pedidos/cliente.html', {'cliente': cliente})
+
+
+def cliente_create(request):
+    form = ClienteForm()
+
+    if request.method == 'POST':
+
+        form = ClienteForm(request.POST)
+
+        if form.is_valid():
+            cliente_nome=form.cleaned_data['nome']
+            cliente_telefone=form.cleaned_data['telefone']
+            cliente_data_nascimento=form.cleaned_data['data_nascimento']
+
+            novo_cliente=Cliente(
+                nome=cliente_nome,
+                telefone=cliente_telefone,
+                data_nascimento=cliente_data_nascimento
+            )
+            novo_cliente.save()
+
+            return redirect('pedidos:clientes')
+
+    return render(request, 'pedidos/add_cliente.html', {'form': form})
 
 
 def produtos(request):
